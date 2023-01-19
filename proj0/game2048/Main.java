@@ -36,7 +36,7 @@ public class Main {
 
         GUI gui;
 
-        gui = new GUI("2048 61B", model);
+        gui = new GUI("2048 Areeb", model);
         gui.display(true);
 
         InputSource inp;
