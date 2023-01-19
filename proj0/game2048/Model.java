@@ -113,6 +113,7 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+        board.setViewingPerspective(side);
         for (int c = 3; c >= 0; c -= 1){
             for (int r = 3; r >=0; r -= 1) {
                 Tile currTile = board.tile(c, r);
@@ -128,6 +129,7 @@ public class Model extends Observable {
         if (changed) {
             setChanged();
         }
+        board.setViewingPerspective(Side.NORTH);
         return changed;
     }
     public boolean columnProcessor(int c, Tile currTile){
@@ -185,7 +187,6 @@ public class Model extends Observable {
 
         for (int y = 0; y < b.size(); y += 1){
             for (int x = 0; x < b.size(); x += 1) {
-                System.out.println((b.tile(x,y)));
                 if (b.tile(x,y) == null){
                     continue;
                 }
