@@ -175,19 +175,19 @@ public class Model extends Observable {
             }
             if (topTile == null) {
                     board.move(c,r,currTile);
-                    changed = true;
-                    nextTile(c,r-1);
+                    return true;
+
 
             } else {
                 if(topTile.value() == currTile.value()){
                     board.move(c, r, currTile);
                     this.score += currTile.value()*2;
                     changed = true;
-                    currTile = nextTile(c,r);
+                    currTile = nextTile(c,row-1);
                 }else {
                     board.move(c, r, currTile);
                     changed = true;
-                    currTile = nextTile(c,r);
+                    currTile = nextTile(c,row-1);
                 }
             }
 
@@ -200,9 +200,9 @@ public class Model extends Observable {
         //int[] usedRows = new int[currR];
         //int x = 0;
         //while (x < usedRows.length){
-            for (int r = board.size() - 1; r >= 0; r--) {
+            for (int r = currR; r >= 0; r--) {
                 Tile nextTile = board.tile(c, r);
-                if ((nextTile != null) && (r != currR)) { // fails triple merge test, because it does not keep track of the tiles in a column
+                if ((nextTile != null) ) { // fails triple merge test, because it does not keep track of the tiles in a column
                     //usedRows[0] = r;
                     return nextTile;
                 }
