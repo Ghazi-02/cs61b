@@ -144,16 +144,14 @@ public class Model extends Observable {
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
         board.setViewingPerspective(side);
-        for (int r = 2; r >= 0; r -= 1) {
-            for (int c = 3; c >= 0; c -= 1) {
-                Tile currTile = board.tile(c, r);
-                if (currTile != null) {
-                    if (columnProcessor(c, r, currTile)) {
-                        changed = true;
 
+            for (int c = 0; c < board.size(); c += 1) {
+               for( int r = 2; r >= 0; r --){
+
+                        if (columnProcessor(c,r)){
+                            changed = true;
+                        }
                     }
-                }
-            }
         }
         checkGameOver();
         if (changed) {
@@ -161,13 +159,14 @@ public class Model extends Observable {
         }
         board.setViewingPerspective(Side.NORTH);
         return changed;
+
     }
 
 
-    public boolean columnProcessor(int c, int row, Tile currTile) {
+    public boolean columnProcessor(int c, int row) {
         //Used to check whether each tile in a column has value and compares that to the currTile
+        Tile currTile = board.tile(c,row);
         boolean changed = false;
-
         for (int r = board.size()-1; r >=row; r--) {
             Tile topTile = board.tile(c, r);
             if(currTile == null ){
@@ -175,15 +174,13 @@ public class Model extends Observable {
             }
             if (topTile == null) {
                     board.move(c,r,currTile);
-                    return true;
-
-
+                   return true;
             } else {
                 if(topTile.value() == currTile.value()){
-                    board.move(c, r, currTile);
-                    this.score += currTile.value()*2;
-                    changed = true;
-                    currTile = nextTile(c,row-1);
+                        this.score += currTile.value()*2;
+                        board.move(c, r, currTile);
+                        changed = true;
+                        currTile = nextTile(c, row - 1);
                 }else {
                     board.move(c, r, currTile);
                     changed = true;
