@@ -146,13 +146,15 @@ public class Model extends Observable {
         board.setViewingPerspective(side);
 
             for (int c = 0; c < board.size(); c += 1) {
-               for( int r = 2; r >= 0; r --){
+                for (int r = board.size() - 1; r >= 0; r--) {
+                    Tile currTile = board.tile(c,r);
+                    if (currTile == null){
+                    }else{  // currTile != null
 
-                        if (columnProcessor(c,r)){
-                            changed = true;
                         }
                     }
-        }
+
+            }
         checkGameOver();
         if (changed) {
             setChanged();
@@ -165,41 +167,15 @@ public class Model extends Observable {
 
     public boolean columnProcessor(int c, int row) {
         //Used to check whether each tile in a column has value and compares that to the currTile
-        Tile currTile = board.tile(c,row);
-        boolean changed = false;
-        for (int r = board.size()-1; r >=row; r--) {
-            Tile topTile = board.tile(c, r);
-            if(currTile == null ){
-                return changed;
-            }
-            if (topTile == null) {
-                    board.move(c,r,currTile);
-                   return true;
-            } else {
-                if(topTile.value() == currTile.value()){
-                        this.score += currTile.value()*2;
-                        board.move(c, r, currTile);
-                        changed = true;
-                        currTile = nextTile(c, row - 1);
-                }else {
-                    board.move(c, r, currTile);
-                    changed = true;
-                    currTile = nextTile(c,row-1);
-                }
-            }
 
-
-        }
-        return changed;
+        return true;
     }
     public Tile nextTile(int c,int currR) {
         // takes in a tile and finds the next tile in that column if there is none return null
-        //int[] usedRows = new int[currR];
-        //int x = 0;
-        //while (x < usedRows.length){
+
             for (int r = currR; r >= 0; r--) {
                 Tile nextTile = board.tile(c, r);
-                if ((nextTile != null) ) { // fails triple merge test, because it does not keep track of the tiles in a column
+                if(nextTile != null)  { // fails triple merge test, because it does not keep track of the tiles in a column
                     //usedRows[0] = r;
                     return nextTile;
                 }
