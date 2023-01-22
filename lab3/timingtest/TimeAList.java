@@ -28,14 +28,15 @@ public class TimeAList {
         AList<Integer> XList = new AList<>();
         AList<Integer> L  = new AList<>();
         AList<Double> LTimes = new AList<>();
-        Stopwatch sw = new Stopwatch();
-        for (int x =   1000; x <= 128000; x *= 2){
-         for (int y = 0 ; y <= x; y++) {
-             L.addLast(x);
-         }
-         double tIS = sw.elapsedTime();
-         LTimes.addLast(tIS);
-         XList.addLast(x);
+
+        for (int x =   1000; x <= 12800000; x *= 2){
+            Stopwatch sw = new Stopwatch();
+            for (int y = 0 ; y <= x; y++) {
+                L.addLast(x);
+            }
+            double tIS = sw.elapsedTime();
+            LTimes.addLast(tIS);
+            XList.addLast(x);
         }
         printTimingTable(XList,LTimes,XList);
     }
