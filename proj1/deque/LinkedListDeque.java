@@ -1,48 +1,74 @@
 package deque;
 
-public class LinkedListDeque {
+public class LinkedListDeque<Type> {
 
     private class LinkedNode {
-        public int item;
+        public LinkedNode prev;
+        public Type item;
         public LinkedNode next;
-        public LinkedNode(int i, LinkedNode n ){
+        public LinkedNode(Type i, LinkedNode n){
             item = i;
             next = n;
+
         }
     }
-    private int size = 0;
-    private LinkedNode sentinel;
+    private int size;
+    private LinkedNode sentFront;
+    private LinkedNode sentBack;
     public LinkedListDeque(){
-        sentinel = new LinkedNode(0,null);
+        sentFront = new LinkedNode(null,null);
+        sentBack = new LinkedNode(null,null);
         size = 0;
     }
-    public LinkedListDeque(int n){
-        sentinel = new LinkedNode(0,null);
-        sentinel.next = new LinkedNode(n,null);
-            size = 1;
+    public LinkedListDeque(Type n){
+        sentFront = new LinkedNode(null,null);
+        sentBack = new LinkedNode(null,null);
+        sentFront.next = new LinkedNode(n,null);
+        sentBack.next =  new LinkedNode(sentFront.next.item,null);
+        size = 1;
     }
     public int size(){
         return size;
     }
-    public void addFirst(int n){
-        sentinel.next = new LinkedNode(n, sentinel.next);
-        size ++;
+    public void addFirst(Type n){
+    sentFront.next = new LinkedNode(n,sentFront.next);
+    //sentBack.next = new LinkedNode(sentFront.next.item,sentBack.next);
+    size ++;
     }
-    public void addLast(int n){
+    public void addLast(Type n){
+        sentBack.next = new LinkedNode(n,null);
+        sentBack = sentBack.next;
         size++;
-    }
-    public void removeFirst(){
-    size--;
-    }
-    public void removeLast(){
-    size--;
-    }
-    public int get(int index){
 
-        return index;
+    }
+    public Type removeFirst() {
+        if (size == 0  ){
+            return null;
+        }
+
+        Type removed = sentFront.next.item;
+
+        sentFront.next = new LinkedNode(null, sentFront.next);
+        size--;
+        return removed;
+    }
+    public Type removeLast(){
+        if (size == 0){
+            return null;
+        }
+        size--;
+    sentBack.next = new LinkedNode(null,sentBack.next);
+    return sentBack.next.item;
+    }
+    public Type get(int index){
+        LinkedNode l = sentFront.next;
+        for (int i = 0; i <= index ; i++){
+            l = l.next;
+        }
+        return l.item;
     }
     public int getRecursive(int index){
-        LinkedNode Node = sentinel.next;
+        LinkedNode Node = sentFront.next;
         return getRecursiveHelper(index,Node);
     }
     private int getRecursiveHelper(int index, LinkedNode l){
@@ -54,5 +80,10 @@ public class LinkedListDeque {
             return true;
         }
         return false;
+    }
+
+    public void printDeque(){
+        System.out.print(this);
+        System.out.println();
     }
 }
