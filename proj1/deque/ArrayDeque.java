@@ -10,7 +10,9 @@ public class ArrayDeque<Type> {
         size=0;
     }
     private void resize(int capacity) {
-
+        Type[] array = (Type[]) new Object[capacity];
+        System.arraycopy(items,0,array,0,size);
+        items = array;
     }
     public void addLast(Type x){
 
