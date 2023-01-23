@@ -148,10 +148,21 @@ public class Model extends Observable {
             for (int c = 0; c < board.size(); c += 1) {
                 for (int r = board.size() - 1; r >= 0; r--) {
                     Tile currTile = board.tile(c,r);
-                    if (currTile == null){
-                    }else{  // currTile != null
+                    Tile belowTile = nextTile(c,r);
+                    if(currTile != null){
+                        if (belowTile != null){
+                            if(currTile.value() == belowTile.value()){
+                                score += currTile.value()*2;
+                                board.move(c,r,currTile);
+                                changed = true;
+                            }
+                        }else{
 
                         }
+                    }else{
+
+                    }
+
                     }
 
             }
@@ -165,15 +176,10 @@ public class Model extends Observable {
     }
 
 
-    public boolean columnProcessor(int c, int row) {
-        //Used to check whether each tile in a column has value and compares that to the currTile
-
-        return true;
-    }
-    public Tile nextTile(int c,int currR) {
+    public Tile nextTile(int c,int nextR) {
         // takes in a tile and finds the next tile in that column if there is none return null
 
-            for (int r = currR; r >= 0; r--) {
+            for (int r = nextR; r >= 0; r--) {
                 Tile nextTile = board.tile(c, r);
                 if(nextTile != null)  { // fails triple merge test, because it does not keep track of the tiles in a column
                     //usedRows[0] = r;
