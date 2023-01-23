@@ -9,31 +9,50 @@ public class LinkedListDeque {
             item = i;
             next = n;
         }
-
     }
-
-    int size = 0;
-    public LinkedNode first;
+    private int size = 0;
+    private LinkedNode sentinel;
+    public LinkedListDeque(){
+        sentinel = new LinkedNode(0,null);
+        size = 0;
+    }
     public LinkedListDeque(int n){
-        first = new LinkedNode(n,null);
+        sentinel = new LinkedNode(0,null);
+        sentinel.next = new LinkedNode(n,null);
+            size = 1;
     }
     public int size(){
         return size;
     }
     public void addFirst(int n){
-
+        sentinel.next = new LinkedNode(n, sentinel.next);
+        size ++;
     }
-    public void addLast(int n, LinkedListDeque l){
-
+    public void addLast(int n){
+        size++;
     }
-    public void removeFirst(int n, LinkedListDeque l){
-
+    public void removeFirst(){
+    size--;
     }
-    public void removeLast(int n, LinkedListDeque l){
-
+    public void removeLast(){
+    size--;
     }
-    public int get(int index,LinkedListDeque l){
+    public int get(int index){
+
+        return index;
+    }
+    public int getRecursive(int index){
+        LinkedNode Node = sentinel.next;
+        return getRecursiveHelper(index,Node);
+    }
+    private int getRecursiveHelper(int index, LinkedNode l){
 
     return index;
+    }
+    public boolean isEmpty(){
+        if (size == 0){
+            return true;
+        }
+        return false;
     }
 }
