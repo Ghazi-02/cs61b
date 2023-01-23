@@ -1,5 +1,6 @@
 package deque;
 
+import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -127,5 +128,65 @@ public class LinkedListDequeTest {
         }
 
 
+    }
+    @Test
+    public void randomizedTest() {
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        ArrayDeque<Integer> BL = new ArrayDeque<>();
+        int N = 5000;
+        for (int i = 0; i < N; i++) {
+            int operationNumber = StdRandom.uniform(0, 3);
+            if (operationNumber == 0) {
+                //addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addLast((randVal));
+                BL.addLast((randVal));
+                System.out.println("addLast(" + randVal + ") to both Lists");
+            } else if (operationNumber == 1) {
+                //size
+                int size = L.size();
+                int size2 = BL.size();
+                System.out.println("AListNoResizing size: " + size);
+                System.out.println("BuggyAList size: " + size2);
+            } else if (operationNumber == 2 && L.size() > 0) {
+                int last = L.get(L.size()-1);
+                int last2 = BL.get(BL.size()-1);
+                BL.removeLast();
+                L.removeLast();
+                System.out.println("Removed last value of AListNoResizing: " + last);
+                System.out.println("Removed last value of BuggyAList : " + last2);
+            }
+
+
+        }
+    }
+        @Test
+    public void arrayDequeRandomTest(){
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+            ArrayDeque<Integer> BL = new ArrayDeque<>();
+            int N = 5000;
+            for (int i = 0; i < N; i++) {
+                int operationNumber = StdRandom.uniform(0, 3);
+                if (operationNumber == 0) {
+                    //addLast
+                    int randVal = StdRandom.uniform(0, 100);
+                    L.addLast((randVal));
+                    BL.addLast((randVal));
+                    System.out.println("addLast(" + randVal + ") to both Lists");
+                } else if (operationNumber == 1) {
+                    //size
+                    int size = L.size();
+                    int size2 = BL.size();
+                    System.out.println("AList1 size: " + size);
+                    System.out.println("AList2 size: " + size2);
+                } else if (operationNumber == 2 && L.size() > 0) {
+                    int last = L.get(L.size()-1);
+                    int last2 = BL.get(BL.size()-1);
+                    BL.removeLast();
+                    L.removeLast();
+                    System.out.println("Removed last value of AList2: " + last);
+                    System.out.println("Removed last value of AList1 : " + last2);
+                }
+        }
     }
 }
