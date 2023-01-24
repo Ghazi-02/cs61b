@@ -8,68 +8,68 @@ public class ArrayDeque<Type> {
     private int lastIndex;
 
     public ArrayDeque(){
+        size = 0;
         items = (Type[]) new Object[8];
-        size=0;
         firstIndex=0;
-        lastIndex=0;
+        lastIndex=size-1;
     }
     public int size(){
         return size;
     }
-    private void resize(int capacity) {
-        Type[] array = (Type[]) new Object[capacity];
-        System.arraycopy(items,firstIndex,array,firstIndex,size);
+    public void resize(int capacity){
+        Type [] array = (Type[]) new Object[capacity];
+        System.arraycopy(items,0,array,1,size);
         items = array;
     }
-    private int indexFinder(Type x){
-        /* finds the index of param x in item */
-        for (int i = 0; i < size;i++){
-                if (items[i] == x){
-                        return i;
-                }
+    public void addFirst(Type n){
+        //Needs to resize of item[0] is taken to adjust for parameter n
+          if (size > 0){
+              resize(size*2 + 8);
+          }
+          items[firstIndex] = n;
+            size ++;
+    }
+    public void addLast(Type n){
+        if( size == items.length){
+             resize((int)(size*1.01 + 8));
         }
-        return -1;
-    }
-    public void addLast(Type x){
-    if (size == items.length){
-        resize((int)(size*1.01));
-    }
-    items[lastIndex + 1] = x;
-    lastIndex ++;
-    size ++;
-    }
-    public void addFirst(Type x){
-        if (firstIndex == 0){
-
-        }
-        items[firstIndex-1] = x;
+        items[size] = n;
         size ++;
-        firstIndex--;
-    }
-    public Type removeLast(){
-    if(size / items.length == 0.25){
-        resize((int)(size * 0.5));
-    }
-        Type x = get(lastIndex);
-        items[lastIndex] = null;
-        size--;
-        lastIndex -= 1;
-        return x;
     }
     public Type removeFirst(){
-        Type x = items[firstIndex];
-        items[firstIndex] = null;
-        size--;
+        if (size == 0){
+            return null;
+        }
+        Type removedVal = items[0];
+        items[0]= null;
+        size --;
         firstIndex++;
-        return x;
+        return removedVal;
+    }
+    public Type removeLast(){
+        if(size / items.length == 0.25){
+            resize((int)(size * 0.5 + 8));
+        }
+        if (size == 0){
+            return null;
+        }
+        Type removedVal = items[size-1];
+        items[size-1] = null;
+        size --;
+        return removedVal;
+
+    }
+    public String printDeque(){
+        String repr = "";
+        for (int x = firstIndex; x < size + firstIndex;x ++){
+            repr = repr + " " + items[x];
+        }
+        return repr;
     }
     public Type get(int index){
         return items[index];
     }
     public boolean isEmpty(){
-        if (size == 0){
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 }
