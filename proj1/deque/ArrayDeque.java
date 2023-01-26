@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<Type> implements Iterable<Type> {
+public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
 
     private Type[] items;
     private int size;
@@ -16,16 +16,17 @@ public class ArrayDeque<Type> implements Iterable<Type> {
         lastIndex = 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
-    public void resize(int capacity, int pos) {
+    private void resize(int capacity, int pos) {
         Type[] array = (Type[]) new Object[capacity];
         System.arraycopy(items, 0, array, pos, size);
         items = array;
     }
-
+    @Override
     public void addFirst(Type n) {
         //Needs to resize of item[0] is taken to adjust for parameter n
         if (size > 0) {
@@ -36,6 +37,7 @@ public class ArrayDeque<Type> implements Iterable<Type> {
         size++;
     }
 
+    @Override
     public void addLast(Type n) {
         if (size / items.length > 0.75) {
             resize((int) (size * 1.01 + 8), 0);
@@ -58,6 +60,7 @@ public class ArrayDeque<Type> implements Iterable<Type> {
         return removedVal;
     }
 
+    @Override
     public Type removeLast() {
         if (size / items.length == 0.25) {
             resize((int) (size * 0.5 + 8), 1);
@@ -79,6 +82,7 @@ public class ArrayDeque<Type> implements Iterable<Type> {
 
     }
 
+    @Override
     public void printDeque() {
         String repr = "";
         for (int x = firstIndex; x < size + firstIndex; x++) {
@@ -87,6 +91,7 @@ public class ArrayDeque<Type> implements Iterable<Type> {
         System.out.println(repr);
     }
 
+    @Override
     public String toString() {
         StringBuilder returnString = new StringBuilder("{");
         for (int i = firstIndex; i < lastIndex - 1; i += 1) {
@@ -99,14 +104,13 @@ public class ArrayDeque<Type> implements Iterable<Type> {
     }
 
 
+    @Override
     public Type get(int index) {
         return items[index];
     }
 
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
+    @Override
     public boolean equals(Object other){
         if (this == other) {
             return true;
@@ -136,6 +140,7 @@ public class ArrayDeque<Type> implements Iterable<Type> {
         }
         return false;
     }
+    @Override
     public Iterator<Type> iterator() {
         return new ArrayDequeSetIterator();
     }
@@ -147,10 +152,12 @@ public class ArrayDeque<Type> implements Iterable<Type> {
             pos = firstIndex;
         }
 
+        @Override
         public boolean hasNext() {
             return pos < lastIndex;
         }
 
+        @Override
         public Type next() {
             Type returnItem = items[pos];
             pos++;
