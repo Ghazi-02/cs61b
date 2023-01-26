@@ -1,8 +1,9 @@
 package deque;
 
 import javax.script.ScriptEngine;
+import java.util.Iterator;
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Iterable<T> {
 
     private class LinkedNode {
         public LinkedNode prev;
@@ -28,14 +29,6 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    /* public LinkedListDeque(T n) {
-         sentFront = new LinkedNode(null,null, null);
-         sentBack = new LinkedNode(null,null, null);
-         sentFront.next = new LinkedNode(null,n ,null);
-         sentBack.next = new LinkedNode(null,sentFront.next.item, null);
-         size = 1;
-     }
- */
     public int size() {
         return size;
     }
@@ -90,7 +83,7 @@ public class LinkedListDeque<T> {
         return l.item;
     }
 
-    public T getRecur(int index) {
+    public T getRecursive(int index) {
         LinkedNode l = sentinel.next;
         return getRecurHelper(index, l,0);
     }
@@ -107,16 +100,54 @@ public class LinkedListDeque<T> {
         return size == 0;
     }
 
-    public String printDeque() {
+    public  void printDeque() {
         LinkedNode l = sentinel.next;
         String repr = "";
         while (l != sentinel) {
+
             repr = repr + " " + l.item;
+
+            l = l.next;
+        }
+
+        System.out.println(repr);
+
+    }
+    @Override
+    public String toString() {
+        LinkedNode l = sentinel.next;
+        String repr = "";
+        while (l != sentinel) {
+
+            repr = repr + " " + l.item;
+
             l = l.next;
         }
 
         return repr;
 
+    }
+    @Override
+    public Iterator<T> iterator(){
+        return new SetLinkedListDequeIterator();
+    }
+    private class SetLinkedListDequeIterator implements Iterator<T>{
+        private LinkedNode p;
+
+        public SetLinkedListDequeIterator(){
+            p=sentinel;
+        }
+        @Override
+        public boolean hasNext(){
+            return p.next != sentinel;
+        }
+        @Override
+        public T next(){
+            T returnedItem = p.next.item;
+            p = p.next;
+            return returnedItem;
+
+        }
     }
 
     public void main(String[] args) {

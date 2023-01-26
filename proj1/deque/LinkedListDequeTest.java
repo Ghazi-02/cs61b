@@ -153,9 +153,9 @@ public class LinkedListDequeTest {
         L.addLast(10);
         L.addLast(11);
         L.addLast(12);
-        assertEquals("3",L.getRecur(0).toString());
-        assertEquals("2",L.getRecur(1).toString());
-        assertEquals("12",L.getRecur(5).toString());
+        assertEquals("3",L.getRecursive(0).toString());
+        assertEquals("2",L.getRecursive(1).toString());
+        assertEquals("12",L.getRecursive (5).toString());
     }
 
     @Test
@@ -196,7 +196,7 @@ public class LinkedListDequeTest {
         L.addLast(10);
         L.addLast(11);
         L.addLast(12);
-        assertEquals(" 3 2 1 10 11 12",L.printDeque());
+        assertEquals(" 3 2 1 10 11 12",L.toString());
 
     }
     @Test
@@ -209,7 +209,7 @@ public class LinkedListDequeTest {
         L.addLast(11);
         L.addLast(12);
         assertEquals("3", L.removeFirst().toString());
-        assertEquals(" 2 1 10 11 12",L.printDeque());
+        assertEquals(" 2 1 10 11 12",L.toString());
 
     }
     @Test
@@ -222,9 +222,79 @@ public class LinkedListDequeTest {
         L.addLast(11);
         L.addLast(12);
         assertEquals("12", L.removeLast().toString());
-        assertEquals(" 3 2 1 10 11",L.printDeque());
+        assertEquals(" 3 2 1 10 11",L.toString());
 
     }
+    @Test
+    public void TestIterator(){
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        for(Integer x : L){
+            System.out.println(x);
+        }
+    }
+    @Test
+    public void TestEqualsTrue(){
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        LinkedListDeque<Integer> BL = new LinkedListDeque<>();
+        BL.addFirst(1);
+        BL.addFirst(2);
+        BL.addFirst(3);
+        BL.addLast(10);
+        BL.addLast(11);
+        BL.addLast(12);
+        assertTrue("These should be equal",L.equals(BL));
+    }
+    @Test
+    public void TestEqualsValueFalse(){
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        ArrayDeque<Integer> BL = new ArrayDeque<>();
+        BL.addFirst(1);
+        BL.addFirst(2);
+        BL.addFirst(3);
+        BL.addLast(0);
+        BL.addLast(11);
+        BL.addLast(12);
+        assertFalse("These shouldnt be equal",L.equals(BL));
+    }
+    @Test
+    public void TestEqualsClassFalse(){
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        LinkedListDeque<Integer> BL = new LinkedListDeque<>();
+        BL.addFirst(1);
+        BL.addFirst(2);
+        BL.addFirst(3);
+        BL.addLast(0);
+        BL.addLast(11);
+        BL.addLast(12);
+        assertFalse("These shouldnt be equal",L.equals(BL));
+    }
+
+
 }
+
 
 
