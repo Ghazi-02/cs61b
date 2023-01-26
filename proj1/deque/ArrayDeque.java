@@ -62,7 +62,7 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
 
     @Override
     public Type removeLast() {
-        if (size / items.length == 0.25) {
+        if (size / items.length <= 0.25) {
             resize((int) (size * 0.5 + 8), 1);
         }
         if (size == 0) {

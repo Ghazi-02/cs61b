@@ -188,6 +188,36 @@ public class LinkedListDequeTest {
         }
     }
     @Test
+    public void RemoveFirstRandomTest(){
+
+        LinkedListDeque<Integer> L = new LinkedListDeque<>();
+        LinkedListDeque<Integer> BL = new LinkedListDeque<>();
+        int N = 5000;
+        for(int i = 0; i < N; i++){
+            int operationNumber = StdRandom.uniform(0, 3);
+            if (operationNumber == 0) {
+                //addLast
+                int randVal = StdRandom.uniform(0, 100);
+                L.addFirst((randVal));
+                BL.addFirst((randVal));
+                System.out.println("addFirst(" + randVal + ") to both Lists");
+            } else if (operationNumber == 1) {
+                //size
+                int size = L.size();
+                int size2 = BL.size();
+                System.out.println("AList1 size: " + size);
+                System.out.println("AList2 size: " + size2);
+            } else if (operationNumber == 2 && L.size() > 0) {
+                int last = L.get(L.size()-1);
+                int last2 = BL.get(BL.size()-1);
+                BL.removeFirst();
+                L.removeFirst();
+                System.out.println("Removed First value of AList2: " + last);
+                System.out.println("Removed First value of AList1 : " + last2);
+            }
+        }
+    }
+    @Test
     public void AddFirstAddLast(){
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);

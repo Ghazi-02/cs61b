@@ -50,6 +50,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         LinkedNode First = sentinel.next;
         T FirstItem = First.item;
         sentinel.next = sentinel.next.next;
+        sentinel.next.prev=sentinel;
         size--;
         return FirstItem;
     }
@@ -72,7 +73,6 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         }
 
         T LastItem = sentinel.prev.item;
-
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
 
@@ -83,27 +83,47 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
 
     @Override
     public T get(int index) {
-        LinkedNode l = sentinel.next;
-        for (int i = 0; i < index; i++) {
-            l = l.next;
+        if (index > size / 2) {
+            for (LinkedNode l = sentinel.prev; l != sentinel; l = l.prev) {
+                if (index == size - 1) {
+                    return l.item;
+                }
+                index += 1;
+            }
+        } else {
+            for (LinkedNode l = sentinel.next; l != sentinel; l = l.next) {
+                if (index == 0) {
+                    return l.item;
+                }
+                index -= 1;
+            }
         }
-        return l.item;
+        return null;
     }
 
     public T getRecursive(int index) {
-        LinkedNode l = sentinel.next;
-        return getRecurHelper(index, l, 0);
+        LinkedNode l = sentinel;
+        if (index > size / 2){
+            return getRecurHelper(index, sentinel.prev, size-1);
+        } else{
+            l = sentinel.next;
+            return getRecurHelper(index, sentinel.next, 0);
+        }
     }
 
     public T getRecurHelper(int index, LinkedNode l, int count) {
         if (count == index) {
             return l.item;
-        } else {
-            return getRecurHelper(index, l.next, count + 1);
+        }else{
+            if (index > size / 2) {
+                return getRecurHelper(index, l.prev, count - 1);
+
+            } else {
+                return getRecurHelper(index, l.next, count + 1);
+            }
         }
 
     }
-
 
 
     @Override
