@@ -246,7 +246,73 @@ public class ArrayDequeTest {
 
         }
 
-
+        @Test
+        public void TestIterator(){
+            ArrayDeque<Integer> L = new ArrayDeque<>();
+            L.addFirst(1);
+            L.addFirst(2);
+            L.addFirst(3);
+            L.addLast(10);
+            L.addLast(11);
+            L.addLast(12);
+            for(Integer x : L){
+                System.out.println(x);
+            }
+        }
+        @Test
+    public void TestEqualsTrue(){
+            ArrayDeque<Integer> L = new ArrayDeque<>();
+            L.addFirst(1);
+            L.addFirst(2);
+            L.addFirst(3);
+            L.addLast(10);
+            L.addLast(11);
+            L.addLast(12);
+            ArrayDeque<Integer> BL = new ArrayDeque<>();
+            BL.addFirst(1);
+            BL.addFirst(2);
+            BL.addFirst(3);
+            BL.addLast(10);
+            BL.addLast(11);
+            BL.addLast(12);
+            assertTrue("These should be equal",L.equals(BL));
+    }
+    @Test
+    public void TestEqualsValueFalse(){
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        ArrayDeque<Integer> BL = new ArrayDeque<>();
+        BL.addFirst(1);
+        BL.addFirst(2);
+        BL.addFirst(3);
+        BL.addLast(0);
+        BL.addLast(11);
+        BL.addLast(12);
+        assertFalse("These shouldnt be equal",L.equals(BL));
+    }
+    @Test
+    public void TestEqualsClassFalse(){
+        ArrayDeque<Integer> L = new ArrayDeque<>();
+        L.addFirst(1);
+        L.addFirst(2);
+        L.addFirst(3);
+        L.addLast(10);
+        L.addLast(11);
+        L.addLast(12);
+        LinkedListDeque<Integer> BL = new LinkedListDeque<>();
+        BL.addFirst(1);
+        BL.addFirst(2);
+        BL.addFirst(3);
+        BL.addLast(0);
+        BL.addLast(11);
+        BL.addLast(12);
+        assertFalse("These shouldnt be equal",L.equals(BL));
+    }
 
 
 }

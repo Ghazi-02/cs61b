@@ -1,6 +1,8 @@
 package deque;
 
-public class ArrayDeque<Type> {
+import java.util.Iterator;
+
+public class ArrayDeque<Type> implements Iterable<Type> {
 
     private Type[] items;
     private int size;
@@ -40,7 +42,7 @@ public class ArrayDeque<Type> {
         }
         items[size] = n;
         size++;
-        lastIndex=size+firstIndex;
+        lastIndex = size + firstIndex;
     }
 
 
@@ -85,13 +87,13 @@ public class ArrayDeque<Type> {
         System.out.println(repr);
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder returnString = new StringBuilder("{");
-        for (int i = firstIndex; i < size+firstIndex-1; i += 1) {
+        for (int i = firstIndex; i < lastIndex - 1; i += 1) {
             returnString.append(items[i].toString());
             returnString.append(", ");
         }
-        returnString.append(items[lastIndex-1]);
+        returnString.append(items[lastIndex - 1]);
         returnString.append("}");
         return returnString.toString();
     }
@@ -104,4 +106,57 @@ public class ArrayDeque<Type> {
     public boolean isEmpty() {
         return size == 0;
     }
+
+    public boolean equals(Object other){
+        if (this == other) {
+            return true;
+        }
+        if (other == null) {
+            return false;
+        }
+        if (other.getClass() != this.getClass()) {
+            return false;
+        }
+        ArrayDeque<Type> o = (ArrayDeque<Type>) other;
+        if (o.size() != this.size()) {
+            return false;
+        }
+        for (Type item : this) {
+            if (!o.contains(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private boolean contains(Type x) {
+        for (int i = 0; i < size; i += 1) {
+            if (items[i].equals(x)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public Iterator<Type> iterator() {
+        return new ArrayDequeSetIterator();
+    }
+
+    private class ArrayDequeSetIterator implements Iterator<Type> {
+        private int pos;
+
+        public ArrayDequeSetIterator() {
+            pos = firstIndex;
+        }
+
+        public boolean hasNext() {
+            return pos < lastIndex;
+        }
+
+        public Type next() {
+            Type returnItem = items[pos];
+            pos++;
+            return returnItem;
+        }
+
+    }
+
 }
