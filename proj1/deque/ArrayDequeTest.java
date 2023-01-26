@@ -216,7 +216,7 @@ public class ArrayDequeTest {
             L.addLast(10);
             L.addLast(11);
             L.addLast(12);
-            assertEquals(" 3 2 1 10 11 12",L.printDeque());
+            assertEquals("{3, 2, 1, 10, 11, 12}",L.toString());
 
         }
         @Test
@@ -229,7 +229,7 @@ public class ArrayDequeTest {
             L.addLast(11);
             L.addLast(12);
             assertEquals("3", L.removeFirst().toString());
-            assertEquals(" 2 1 10 11 12",L.printDeque());
+            assertEquals("{2, 1, 10, 11, 12}",L.toString());
 
         }
         @Test
@@ -242,7 +242,7 @@ public class ArrayDequeTest {
             L.addLast(11);
             L.addLast(12);
             assertEquals("12", L.removeLast().toString());
-            assertEquals(" 3 2 1 10 11",L.printDeque());
+            assertEquals("{3, 2, 1, 10, 11}",L.toString());
 
         }
 

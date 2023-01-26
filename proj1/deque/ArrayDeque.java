@@ -77,13 +77,25 @@ public class ArrayDeque<Type> {
 
     }
 
-    public String printDeque() {
+    public void printDeque() {
         String repr = "";
         for (int x = firstIndex; x < size + firstIndex; x++) {
             repr = repr + " " + items[x];
         }
-        return repr;
+        System.out.println(repr);
     }
+
+    public String toString(){
+        StringBuilder returnString = new StringBuilder("{");
+        for (int i = firstIndex; i < size+firstIndex-1; i += 1) {
+            returnString.append(items[i].toString());
+            returnString.append(", ");
+        }
+        returnString.append(items[lastIndex-1]);
+        returnString.append("}");
+        return returnString.toString();
+    }
+
 
     public Type get(int index) {
         return items[index];
