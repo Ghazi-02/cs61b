@@ -193,12 +193,12 @@ public class ArrayDequeTest {
                 //addLast
                 int randVal = StdRandom.uniform(0, 100);
                 L.addLast((randVal));
-
+                System.out.println(L.toString());
                 System.out.println("addLast(" + randVal + ") to both Lists");
             } else if (operationNumber == 1 && L.size() > 0) {
                 int last = L.removeLast();
                 System.out.println("Removed last value of AList2: " + last);
-
+                System.out.println(L.toString());
             }
         }
     }

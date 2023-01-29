@@ -1,6 +1,5 @@
 package deque;
 
-import javax.script.ScriptEngine;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {

@@ -15,7 +15,7 @@ public class GuitarString {
         buffer = new LinkedListDeque<>();
         int capacity = (int) (SR / frequency);
 
-        while (buffer.size() < Math.round(capacity)){
+        while (buffer.size() < Math.round(capacity)) {
             buffer.addLast((double) 0);
         }
     }
@@ -23,7 +23,7 @@ public class GuitarString {
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
-        for(int x = 0; x < buffer.size(); x++){
+        for (int x = 0; x < buffer.size(); x++) {
             double r = Math.random() - 0.5;
             buffer.removeFirst();
             buffer.addLast(r);
@@ -37,8 +37,8 @@ public class GuitarString {
      */
     public void tic() {
         double removed = buffer.removeFirst();
-        double second= buffer.get(0);
-        double decayed = DECAY*(0.5*(removed+second));
+        double second = buffer.get(0);
+        double decayed = DECAY * (0.5 * (removed + second));
         buffer.addLast(decayed);
     }
 
@@ -48,4 +48,3 @@ public class GuitarString {
         return buffer.get(0);
     }
 }
-

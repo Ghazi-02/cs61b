@@ -2,10 +2,13 @@ package deque;
 
 import edu.princeton.cs.algs4.StdRandom;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 
-/** Performs some basic linked list tests. */
+/**
+ * Performs some basic linked list tests.
+ */
 public class LinkedListDequeTest {
 
 
@@ -83,8 +86,8 @@ public class LinkedListDequeTest {
     public void multipleParamTest() {
 
 
-        LinkedListDeque<String>  lld1 = new LinkedListDeque<String>();
-        LinkedListDeque<Double>  lld2 = new LinkedListDeque<Double>();
+        LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
+        LinkedListDeque<Double> lld2 = new LinkedListDeque<Double>();
         LinkedListDeque<Boolean> lld3 = new LinkedListDeque<Boolean>();
 
         lld1.addFirst("string");
@@ -130,8 +133,9 @@ public class LinkedListDequeTest {
 
 
     }
+
     @Test
-    public void TestGet(){
+    public void TestGet() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -139,13 +143,13 @@ public class LinkedListDequeTest {
         L.addLast(10);
         L.addLast(11);
         L.addLast(12);
-        assertEquals("3",L.get(0).toString());
-        assertEquals("2",L.get(1).toString());
-        assertEquals("12",L.get(5).toString());
+        assertEquals("3", L.get(0).toString());
+        assertEquals("2", L.get(1).toString());
+        assertEquals("12", L.get(5).toString());
     }
 
     @Test
-    public void TestGetRecur(){
+    public void TestGetRecur() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -153,13 +157,13 @@ public class LinkedListDequeTest {
         L.addLast(10);
         L.addLast(11);
         L.addLast(12);
-        assertEquals("3",L.getRecursive(0).toString());
-        assertEquals("2",L.getRecursive(1).toString());
-        assertEquals("12",L.getRecursive (5).toString());
+        assertEquals("3", L.getRecursive(0).toString());
+        assertEquals("2", L.getRecursive(1).toString());
+        assertEquals("12", L.getRecursive(5).toString());
     }
 
     @Test
-    public void LLDequeRandomTest(){
+    public void LLDequeRandomTest() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         LinkedListDeque<Integer> BL = new LinkedListDeque<>();
         int N = 5000;
@@ -178,8 +182,8 @@ public class LinkedListDequeTest {
                 System.out.println("AList1 size: " + size);
                 System.out.println("AList2 size: " + size2);
             } else if (operationNumber == 2 && L.size() > 0) {
-                int last = L.get(L.size()-1);
-                int last2 = BL.get(BL.size()-1);
+                int last = L.get(L.size() - 1);
+                int last2 = BL.get(BL.size() - 1);
                 BL.removeLast();
                 L.removeLast();
                 System.out.println("Removed last value of AList2: " + last);
@@ -187,13 +191,14 @@ public class LinkedListDequeTest {
             }
         }
     }
+
     @Test
-    public void RemoveFirstRandomTest(){
+    public void RemoveFirstRandomTest() {
 
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         LinkedListDeque<Integer> BL = new LinkedListDeque<>();
         int N = 5000;
-        for(int i = 0; i < N; i++){
+        for (int i = 0; i < N; i++) {
             int operationNumber = StdRandom.uniform(0, 3);
             if (operationNumber == 0) {
                 //addLast
@@ -208,8 +213,8 @@ public class LinkedListDequeTest {
                 System.out.println("AList1 size: " + size);
                 System.out.println("AList2 size: " + size2);
             } else if (operationNumber == 2 && L.size() > 0) {
-                int last = L.get(L.size()-1);
-                int last2 = BL.get(BL.size()-1);
+                int last = L.get(L.size() - 1);
+                int last2 = BL.get(BL.size() - 1);
                 BL.removeFirst();
                 L.removeFirst();
                 System.out.println("Removed First value of AList2: " + last);
@@ -217,8 +222,9 @@ public class LinkedListDequeTest {
             }
         }
     }
+
     @Test
-    public void AddFirstAddLast(){
+    public void AddFirstAddLast() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -226,11 +232,12 @@ public class LinkedListDequeTest {
         L.addLast(10);
         L.addLast(11);
         L.addLast(12);
-        assertEquals(" 3 2 1 10 11 12",L.toString());
+        assertEquals(" 3 2 1 10 11 12", L.toString());
 
     }
+
     @Test
-    public void RemoveFirst(){
+    public void RemoveFirst() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -239,11 +246,12 @@ public class LinkedListDequeTest {
         L.addLast(11);
         L.addLast(12);
         assertEquals("3", L.removeFirst().toString());
-        assertEquals(" 2 1 10 11 12",L.toString());
+        assertEquals(" 2 1 10 11 12", L.toString());
 
     }
+
     @Test
-    public void RemoveLast(){
+    public void RemoveLast() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -252,11 +260,12 @@ public class LinkedListDequeTest {
         L.addLast(11);
         L.addLast(12);
         assertEquals("12", L.removeLast().toString());
-        assertEquals(" 3 2 1 10 11",L.toString());
+        assertEquals(" 3 2 1 10 11", L.toString());
 
     }
+
     @Test
-    public void TestIterator(){
+    public void TestIterator() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -264,12 +273,13 @@ public class LinkedListDequeTest {
         L.addLast(10);
         L.addLast(11);
         L.addLast(12);
-        for(Integer x : L){
+        for (Integer x : L) {
             System.out.println(x);
         }
     }
+
     @Test
-    public void TestEqualsTrue(){
+    public void TestEqualsTrue() {
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -284,10 +294,11 @@ public class LinkedListDequeTest {
         BL.addLast(10);
         BL.addLast(11);
         BL.addLast(12);
-        assertTrue("These should be equal",L.equals(BL));
+        assertTrue("These should be equal", L.equals(BL));
     }
+
     @Test
-    public void TestEqualsValueFalse(){
+    public void TestEqualsValueFalse() {
         ArrayDeque<Integer> L = new ArrayDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -302,10 +313,11 @@ public class LinkedListDequeTest {
         BL.addLast(0);
         BL.addLast(11);
         BL.addLast(12);
-        assertFalse("These shouldnt be equal",L.equals(BL));
+        assertFalse("These shouldnt be equal", L.equals(BL));
     }
+
     @Test
-    public void TestEqualsClassFalse(){
+    public void TestEqualsClassFalse() {
         ArrayDeque<Integer> L = new ArrayDeque<>();
         L.addFirst(1);
         L.addFirst(2);
@@ -320,7 +332,7 @@ public class LinkedListDequeTest {
         BL.addLast(0);
         BL.addLast(11);
         BL.addLast(12);
-        assertFalse("These shouldnt be equal",L.equals(BL));
+        assertFalse("These shouldnt be equal", L.equals(BL));
     }
 
 

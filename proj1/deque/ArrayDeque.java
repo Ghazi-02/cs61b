@@ -118,8 +118,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     }
 
 
-
-
     @Override
     public T get(int index) {
         return items[index];
@@ -186,3 +184,4 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     }
 
 }
+
