@@ -1,5 +1,7 @@
 package deque;
 
+import afu.org.checkerframework.checker.oigj.qual.O;
+
 import java.util.Iterator;
 
 public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
@@ -19,6 +21,10 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     @Override
     public int size() {
         return size;
+    }
+
+    public int getLastIndex() {
+        return lastIndex;
     }
 
     private void resize(int capacity, int pos) {
@@ -62,6 +68,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     }
 
 
+    @Override
     public T removeFirst() {
         float ratio = ((float) size) / ((float) items.length);
         if ((ratio) < 0.25 && size > 8) {
@@ -86,7 +93,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
     public T removeLast() {
         float ratio = ((float) size) / ((float) items.length);
         if ((ratio) < 0.25 && size > 8) {
-            resize((int) (items.length * 0.50), 1);
+            resize((int) (items.length * 0.50), 0);
         }
         if (size == 0) {
             return null;
@@ -181,7 +188,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
         @Override
         public boolean hasNext() {
-            return pos < lastIndex;
+            return pos <= lastIndex;
         }
 
         @Override
