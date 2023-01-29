@@ -218,7 +218,6 @@ public class ArrayDequeTest {
 
             } else if (operationNumber == 2 && L.size() > 0) {
                 int first = L.removeFirst();
-
                 System.out.println("Removed last value of AList2: " + first);
             }
         }

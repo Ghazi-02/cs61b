@@ -147,8 +147,8 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
             if (o.size() != this.size()) {
                 return false;
             }
-            for (int x = 0; x < this.size; x++) {
-                if (this.get(x) != o.get(x)) {
+            for (int x = firstIndex; x < lastIndex; x++) {
+                if (!this.get(x).equals(o.get(x))) {
                     return false;
                 }
             }
