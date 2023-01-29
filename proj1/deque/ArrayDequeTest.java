@@ -179,9 +179,9 @@ public class ArrayDequeTest {
 
 
         @Test
-        public void LLDequeRandomTest(){
+        public void ADLastRandomTest(){
             ArrayDeque<Integer> L = new ArrayDeque<>();
-            ArrayDeque<Integer> BL = new ArrayDeque<>();;
+
             int N = 5000;
             for (int i = 0; i < N; i++) {
                 int operationNumber = StdRandom.uniform(0, 3);
@@ -189,21 +189,18 @@ public class ArrayDequeTest {
                     //addLast
                     int randVal = StdRandom.uniform(0, 100);
                     L.addLast((randVal));
-                    BL.addLast((randVal));
+
                     System.out.println("addLast(" + randVal + ") to both Lists");
                 } else if (operationNumber == 1) {
                     //size
                     int size = L.size();
-                    int size2 = BL.size();
+
                     System.out.println("AList1 size: " + size);
-                    System.out.println("AList2 size: " + size2);
+
                 } else if (operationNumber == 2 && L.size() > 0) {
-                    int last = L.get(L.size()-1);
-                    int last2 = BL.get(BL.size()-1);
-                    BL.removeLast();
-                    L.removeLast();
+                    int last = L.removeLast();
                     System.out.println("Removed last value of AList2: " + last);
-                    System.out.println("Removed last value of AList1 : " + last2);
+
                 }
             }
         }
@@ -212,21 +209,16 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> L = new ArrayDeque<>();
         int N = 5000;
         for (int i = 0; i < N; i++) {
-            int operationNumber = StdRandom.uniform(0, 3);
+            int operationNumber = StdRandom.uniform(0, 2);
             if (operationNumber == 0) {
                 //addLast
                 int randVal = StdRandom.uniform(0, 100);
                 L.addFirst((randVal));
                 System.out.println("addLast(" + randVal + ") to both Lists");
-            } else if (operationNumber == 1) {
-                //size
-                int size = L.size();
-                System.out.println("AList1 size: " + size);
+            } else if (operationNumber == 1 && L.size() > 0) {
+                int first = L.removeFirst();
 
-            } else if (operationNumber == 2 && L.size() > 0) {
-                int last = L.get(L.size()-1);
-                L.removeFirst();
-                System.out.println("Removed last value of AList2: " + last);
+                System.out.println("Removed last value of AList2: " + first);
             }
         }
     }
