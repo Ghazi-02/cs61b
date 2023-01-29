@@ -2,7 +2,7 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
+public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
 
     private Type[] items;
     private int size;
@@ -21,21 +21,22 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
         return size;
     }
 
-    private void resize(int capacity,int pos) {
+    private void resize(int capacity, int pos) {
         Type[] array = (Type[]) new Object[capacity];
         System.arraycopy(items, firstIndex, array, pos, size);
         items = array;
         firstIndex = pos;
-        lastIndex = firstIndex + size -1;
+        lastIndex = firstIndex + size - 1;
 
     }
+
     @Override
     public void addFirst(Type n) {
         //Needs to resize of item[0] is taken to adjust for parameter n
-        float ratio = ((float) size) /  ((float) items.length);
-        if (firstIndex > 0 && get(firstIndex-1) == null){
-            items[firstIndex -1]= n;
-            firstIndex=firstIndex-1;
+        float ratio = ((float) size) / ((float) items.length);
+        if (firstIndex > 0 && get(firstIndex - 1) == null) {
+            items[firstIndex - 1] = n;
+            firstIndex = firstIndex - 1;
         }
         if (ratio > 0.75) {
             resize((int) (items.length * 1.5), 0);
@@ -51,7 +52,7 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
 
     @Override
     public void addLast(Type n) {
-        float ratio = ((float) size) /  ((float) items.length);
+        float ratio = ((float) size) / ((float) items.length);
         if (ratio > 0.75) {
             resize((int) (items.length * 1.5), 0);
         }
@@ -62,14 +63,14 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
 
 
     public Type removeFirst() {
-        float ratio = ((float) size) /  ((float) items.length);
+        float ratio = ((float) size) / ((float) items.length);
         if ((ratio) < 0.25 && size > 8) {
             resize((int) (items.length * 0.50), 1);
         }
         if (size == 0) {
             return null;
         }
-        if (lastIndex == 1){
+        if (lastIndex == 1) {
 
         }
         Type removedVal = items[firstIndex];
@@ -83,7 +84,7 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
 
     @Override
     public Type removeLast() {
-        float ratio = ((float) size) /  ((float) items.length);
+        float ratio = ((float) size) / ((float) items.length);
         if ((ratio) < 0.25 && size > 8) {
             resize((int) (items.length * 0.50), 1);
         }
@@ -134,27 +135,29 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
 
 
     @Override
-    public boolean equals(Object other){
+    public boolean equals(Object other) {
         if (this == other) {
             return true;
         }
         if (other == null) {
             return false;
         }
-        if (other.getClass() != this.getClass()) {
-            return false;
-        }
-        ArrayDeque<Type> o = (ArrayDeque<Type>) other;
-        if (o.size() != this.size()) {
-            return false;
-        }
-        for (Type item : this) {
-            if (!o.contains(item)) {
+        if (other instanceof Deque) {
+            Deque<Type> o = (Deque<Type>) other;
+            if (o.size() != this.size()) {
                 return false;
             }
+            for (int x = 0; x < this.size; x++) {
+                if (this.get(x) != o.get(x)) {
+                    return false;
+                }
+            }
+            return true;
         }
-        return true;
+
+        return false;
     }
+
     private boolean contains(Type x) {
         for (int i = 0; i < size; i += 1) {
             if (items[i].equals(x)) {
@@ -163,6 +166,7 @@ public class ArrayDeque<Type> implements Iterable<Type>,Deque<Type>  {
         }
         return false;
     }
+
     @Override
     public Iterator<Type> iterator() {
         return new ArrayDequeSetIterator();

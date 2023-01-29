@@ -184,20 +184,15 @@ public class ArrayDequeTest {
 
             int N = 5000;
             for (int i = 0; i < N; i++) {
-                int operationNumber = StdRandom.uniform(0, 3);
+                int operationNumber = StdRandom.uniform(0, 2);
+                System.out.println(i);
                 if (operationNumber == 0) {
                     //addLast
                     int randVal = StdRandom.uniform(0, 100);
                     L.addLast((randVal));
 
                     System.out.println("addLast(" + randVal + ") to both Lists");
-                } else if (operationNumber == 1) {
-                    //size
-                    int size = L.size();
-
-                    System.out.println("AList1 size: " + size);
-
-                } else if (operationNumber == 2 && L.size() > 0) {
+                }else if (operationNumber == 1 && L.size() > 0) {
                     int last = L.removeLast();
                     System.out.println("Removed last value of AList2: " + last);
 
@@ -209,13 +204,19 @@ public class ArrayDequeTest {
         ArrayDeque<Integer> L = new ArrayDeque<>();
         int N = 5000;
         for (int i = 0; i < N; i++) {
-            int operationNumber = StdRandom.uniform(0, 2);
+            int operationNumber = StdRandom.uniform(0, 3);
             if (operationNumber == 0) {
                 //addLast
                 int randVal = StdRandom.uniform(0, 100);
                 L.addFirst((randVal));
                 System.out.println("addLast(" + randVal + ") to both Lists");
-            } else if (operationNumber == 1 && L.size() > 0) {
+            } else if (operationNumber == 1) {
+                //size
+                int size = L.size();
+
+                System.out.println("AList1 size: " + size);
+
+            } else if (operationNumber == 2 && L.size() > 0) {
                 int first = L.removeFirst();
 
                 System.out.println("Removed last value of AList2: " + first);
