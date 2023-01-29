@@ -50,7 +50,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         LinkedNode First = sentinel.next;
         T FirstItem = First.item;
         sentinel.next = sentinel.next.next;
-        sentinel.next.prev=sentinel;
+        sentinel.next.prev = sentinel;
         size--;
         return FirstItem;
     }
@@ -103,18 +103,18 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
 
     public T getRecursive(int index) {
         LinkedNode l = sentinel;
-        if (index > size / 2){
-            return getRecurHelper(index, sentinel.prev, size-1);
-        } else{
+        if (index > size / 2) {
+            return getRecurHelper(index, sentinel.prev, size - 1);
+        } else {
             l = sentinel.next;
             return getRecurHelper(index, sentinel.next, 0);
         }
     }
 
-    public T getRecurHelper(int index, LinkedNode l, int count) {
+    private T getRecurHelper(int index, LinkedNode l, int count) {
         if (count == index) {
             return l.item;
-        }else{
+        } else {
             if (index > size / 2) {
                 return getRecurHelper(index, l.prev, count - 1);
 
@@ -141,20 +141,7 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
 
     }
 
-    @Override
-    public String toString() {
-        LinkedNode l = sentinel.next;
-        String repr = "";
-        while (l != sentinel) {
 
-            repr = repr + " " + l.item;
-
-            l = l.next;
-        }
-
-        return repr;
-
-    }
 
     @Override
     public Iterator<T> iterator() {
@@ -206,7 +193,4 @@ public class LinkedListDeque<T> implements Iterable<T>, Deque<T> {
         return false;
     }
 
-    public void main(String[] args) {
-
-    }
 }

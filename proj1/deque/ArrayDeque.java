@@ -1,7 +1,5 @@
 package deque;
 
-import afu.org.checkerframework.checker.oigj.qual.O;
-
 import java.util.Iterator;
 
 public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
@@ -23,9 +21,6 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         return size;
     }
 
-    public int getLastIndex() {
-        return lastIndex;
-    }
 
     private void resize(int capacity, int pos) {
         T[] array = (T[]) new Object[capacity];
@@ -122,17 +117,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
         System.out.println(repr);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder returnString = new StringBuilder("{");
-        for (int i = firstIndex; i < lastIndex; i += 1) {
-            returnString.append(items[i].toString());
-            returnString.append(", ");
-        }
-        returnString.append(items[lastIndex]);
-        returnString.append("}");
-        return returnString.toString();
-    }
+
 
 
     @Override
