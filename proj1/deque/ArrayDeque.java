@@ -2,16 +2,16 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
+public class ArrayDeque<T> implements Iterable<T>, Deque<T> {
 
-    private Type[] items;
+    private T[] items;
     private int size;
     private int firstIndex;
     private int lastIndex;
 
     public ArrayDeque() {
         size = 0;
-        items = (Type[]) new Object[8];
+        items = (T[]) new Object[8];
         firstIndex = 0;
         lastIndex = 0;
     }
@@ -22,7 +22,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
     }
 
     private void resize(int capacity, int pos) {
-        Type[] array = (Type[]) new Object[capacity];
+        T[] array = (T[]) new Object[capacity];
         System.arraycopy(items, firstIndex, array, pos, size);
         items = array;
         firstIndex = pos;
@@ -31,7 +31,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
     }
 
     @Override
-    public void addFirst(Type n) {
+    public void addFirst(T n) {
         //Needs to resize of item[0] is taken to adjust for parameter n
         float ratio = ((float) size) / ((float) items.length);
         if (firstIndex > 0 && get(firstIndex - 1) == null) {
@@ -51,7 +51,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
     }
 
     @Override
-    public void addLast(Type n) {
+    public void addLast(T n) {
         float ratio = ((float) size) / ((float) items.length);
         if (ratio > 0.75) {
             resize((int) (items.length * 1.5), 0);
@@ -62,7 +62,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
     }
 
 
-    public Type removeFirst() {
+    public T removeFirst() {
         float ratio = ((float) size) / ((float) items.length);
         if ((ratio) < 0.25 && size > 8) {
             resize((int) (items.length * 0.50), 1);
@@ -73,7 +73,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
         if (lastIndex == 1) {
 
         }
-        Type removedVal = items[firstIndex];
+        T removedVal = items[firstIndex];
         items[firstIndex] = null;
         lastIndex = size + firstIndex - 1;
         size--;
@@ -83,7 +83,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
     }
 
     @Override
-    public Type removeLast() {
+    public T removeLast() {
         float ratio = ((float) size) / ((float) items.length);
         if ((ratio) < 0.25 && size > 8) {
             resize((int) (items.length * 0.50), 1);
@@ -93,12 +93,12 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
         }
         if (size == 1) {
             size--;
-            Type removedVal = items[lastIndex];
+            T removedVal = items[lastIndex];
             items[lastIndex] = null;
             return removedVal;
         }
 
-        Type removedVal = items[lastIndex];
+        T removedVal = items[lastIndex];
         items[lastIndex] = null;
         lastIndex--;
         size--;
@@ -129,7 +129,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
 
 
     @Override
-    public Type get(int index) {
+    public T get(int index) {
         return items[index];
     }
 
@@ -143,7 +143,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
             return false;
         }
         if (other instanceof Deque) {
-            Deque<Type> o = (Deque<Type>) other;
+            Deque<T> o = (Deque<T>) other;
             if (o.size() != this.size()) {
                 return false;
             }
@@ -158,7 +158,7 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
         return false;
     }
 
-    private boolean contains(Type x) {
+    private boolean contains(T x) {
         for (int i = 0; i < size; i += 1) {
             if (items[i].equals(x)) {
                 return true;
@@ -168,11 +168,11 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
     }
 
     @Override
-    public Iterator<Type> iterator() {
+    public Iterator<T> iterator() {
         return new ArrayDequeSetIterator();
     }
 
-    private class ArrayDequeSetIterator implements Iterator<Type> {
+    private class ArrayDequeSetIterator implements Iterator<T> {
         private int pos;
 
         public ArrayDequeSetIterator() {
@@ -185,8 +185,8 @@ public class ArrayDeque<Type> implements Iterable<Type>, Deque<Type> {
         }
 
         @Override
-        public Type next() {
-            Type returnItem = items[pos];
+        public T next() {
+            T returnItem = items[pos];
             pos++;
             return returnItem;
         }
