@@ -88,7 +88,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         root = put(root, key, value);
     }
 
-    public BSTNode put(BSTNode t, K key, V value) {
+    private BSTNode put(BSTNode t, K key, V value) {
         if (t == null) {
             return new BSTNode(key, value, 1);
         }
