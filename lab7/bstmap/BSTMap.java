@@ -104,6 +104,9 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
         return t;
 
     }
+    public void printInOrder(){
+        throw new UnsupportedOperationException();
+    }
 
     @Override
     public Set<K> keySet() {
